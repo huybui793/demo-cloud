@@ -15,7 +15,10 @@ var app = express();
 var mongoose = require('mongoose');
 var uri = "mongodb+srv://longndt:LZOJXV8cjLHFfYsQ@cluster0.gobiulx.mongodb.net/gch1101";
 mongoose.connect(uri)
-.then(() => { console.log ("db ok")});
+mongoose.set("strictQuery", false);
+mongoose.connect(uri, () => {
+  console.log("Connected to MongoDB");
+});
 
 //body-parser
 var bodyParser = require('body-parser');
@@ -54,7 +57,7 @@ app.use(function(err, req, res, next) {
 });
 
 //setup port for deployment
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 3001;
 app.listen(port); 
 
 module.exports = app;
